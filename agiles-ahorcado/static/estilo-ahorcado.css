@@ -1,15 +1,24 @@
-
+body{
+  background: rgb(63,94,251);
+  background: radial-gradient(circle, #89ade3 0%, #dde9c1 100%);
+}
 * {
   box-sizing: border-box;
 }
 .main-container {
+  
   max-width: 800px;
   margin: auto;
+  height: auto;
 }
 h1.titulo {
   margin: 50px auto 80px auto;
   text-align: center;
-  font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+  color:white;
+  font-family: monospace;
+}
+.intentos{
+  color:white;
 }
 h1#msg-final {
   text-align: center;
@@ -45,7 +54,7 @@ h1#msg-final {
 h2.palabra {
   margin: 0 auto 25px auto;
   text-align: center;
-  color: royalblue;
+  color: rgb(255, 255, 255);
   text-transform: uppercase;
   letter-spacing: 6px;
 }
@@ -56,7 +65,7 @@ h2.palabra {
   margin: 10px auto; 
 }
 .no-wrap {
-  flex-wrap: nowrap !important;
+  flex-wrap: nowrap ;
 }
 .col {
   width: 50%;
@@ -85,8 +94,7 @@ picture img {
 }
 #image5, #image4, #image3,
 #image2, #image1, #image0 {
-  opacity: 0;
-  transition: opacity .3s ease;
+  
 }
 .fade-in {
   opacity: 1 !important;
