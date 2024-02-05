@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="main-container">
-    <h1 class="titulo" id="titulo">Juego del ahorcado</h1>
+    <h1 class="titulo" id="titulo" >Juego del ahorcado</h1>
     <h1 id="msg-final"></h1>
     <h3 id="acierto"></h3>
     
@@ -59,7 +59,7 @@
             </div>
 
             <form action="/empezar" method="POST">
-                <button onclick="index()" id="reset" class="btn btn-light" style="margin-right:5px;">Elegir otra palabra</button>
+                <button onclick="index()" id="reset" class="btn btn-danger" style="margin-right:5px;font-family: monospace;">Elegir otra palabra</button>
             </form> 
             {% if session.get('pista')!= '' : %}
             <div  style="width:145px;">
@@ -67,7 +67,7 @@
             </div>
                 {% else: %}
             <form method="POST" action="/pista">
-                <button onclick="pista()" id="pista" class="btn btn-light" >Dame una pista!</button>
+                <button onclick="pista()" id="pista" class="btn btn-info" >Dame una pista!</button>
             </form>
             {% endif %}
 
@@ -79,9 +79,9 @@
                 <div class="flex-row" id="abcdario">
                     {% for letra in abecedario: %}
                         {%if letra in session.get('letras_usadas', []): %}
-                            <button type="submit" disabled="true" name="letra" value="{{letra}}" class="btn btn-danger" >{{ letra }}</button>     
+                            <button type="submit" disabled="true" name="letra" value="{{letra}}" class="btn btn-secondary" id="letra">{{ letra }}</button>     
                         {%else%}
-                            <button type="submit" name="letra" value="{{letra}}" class="btn btn-danger" >{{ letra }}</button>
+                            <button type="submit" name="letra" value="{{letra}}" class="btn btn-light" id="letra">{{ letra }}</button>
                             
                         {%endif%}
                     {% endfor %}
@@ -90,7 +90,7 @@
             {%endif%}
             <div class="col"></div>
         </div>
-    
+        <a href="/" id="botonVolver" class="btn btn-warning">Volver al inicio</a>
 </div>
 
 </body>

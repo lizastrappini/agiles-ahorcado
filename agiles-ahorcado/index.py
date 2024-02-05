@@ -7,27 +7,43 @@ app = Flask(__name__)
 # Clave para poder utilizar variables de sesion
 app.secret_key = 'tu_clave_secreta'
 
-# Palabras disponibles
-palabras = [["python","lenguaje de progamacion"], ["guitarra", "instrumento de cuerdas"],['algoritmo','Secuencia de pasos'],['teclado','utilizado para escribir en la pc'],['reloj','dispositivo para ver el tiempo']]
+#['teclado','utilizado para escribir en la pc'],['reloj','dispositivo para ver el tiempo']
 
+# Palabras disponibles
+palabras_facil = [["sol", "Fuente principal de luz del sistema solar"], ["gato", "Animal doméstico de compañía"],["casa", "Lugar donde vives"] ]
+palabras_intermedio = [["travesia", "Largo viaje o trampolín de experiencias"],["aventura", "Viaje emocionante y arriesgado"], ["melodia", "Secuencia armoniosa de sonidos"] ]
+palabras_dificil = [["efimero", "Que dura por un corto periodo de tiempo"],["magico", "Relacionado con la magia o algo extraordinario"], ["enigma", "Misterio o situación difícil de entender"]]
 
 # Crea una lista de letras del abecedario
 abecedario =["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
 
 # Inicializa variables de sesión
-def initialize_session():
-    session['palabra_a_adivinar'] = elegir_palabra_random()   
+def initialize_session(dificultad):
+    if dificultad == 'facil':
+        session['palabra_a_adivinar'] = elegir_palabra_random_facil()
+    elif dificultad == 'media':
+        session['palabra_a_adivinar'] = elegir_palabra_random_intermedio()
+    else:
+        session['palabra_a_adivinar'] = elegir_palabra_random_dificil()
+    #session['palabra_a_adivinar'] = elegir_palabra_random()   
     session['intentos'] = 0 
     session['letras_adivinadas'] = []  
     session['fin_juego'] = 0
     session['letras_usadas'] = []
     session['palabra_mostrada'] = ''
     session['pista'] = ''
+    session['dificultad'] = dificultad
 
 # Elige una palabra al azar
-def elegir_palabra_random():
-    return random.choice(palabras)
+def elegir_palabra_random_facil():
+    return random.choice(palabras_facil)
+
+def elegir_palabra_random_intermedio():
+    return random.choice(palabras_intermedio)
+
+def elegir_palabra_random_dificil():
+    return random.choice(palabras_dificil)
 
 # Obtengo la pista asociada a la palabra a adivinar
 def obtener_pista():
@@ -80,9 +96,12 @@ def index():
 
 @app.route('/empezar',methods=['POST'])
 def empezar():
-    initialize_session()
+    dificultad = request.form.get('dificultad')
+    initialize_session(dificultad)
+    print(dificultad)
     palabra_mostrada=crear_lineas(session['palabra_a_adivinar'][0])
     session['palabra_mostrada']=palabra_mostrada
+    session['dificultad'] = request.form.get('dificultad')
     return render_template('jugar.html', pista=session['pista'], palabra_a_adivinar=session['palabra_a_adivinar'][0], abecedario=abecedario, intentos=session['intentos'], letras_adivinadas=session['letras_adivinadas'], palabra_mostrada=palabra_mostrada, letras_usadas=session['letras_usadas'], fin_juego=session['fin_juego'])
 
 @app.route('/jugar', methods=['POST'])
