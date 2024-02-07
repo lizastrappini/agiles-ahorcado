@@ -17,9 +17,12 @@ h1.titulo {
   color:white;
   font-family: monospace;
 }
-.intentos{
+h2.titulo{
   color:white;
   font-family: monospace;
+}
+.intentos{
+  color:white;
 }
 h1#msg-final {
   text-align: center;
@@ -104,50 +107,6 @@ picture img {
   border: 2px dashed crimson;
   padding: 3px 2px 2px 6px;
 }
-
-.container {
-  margin-left: 30%; 
-  max-width: 600px;
-  padding: 20px;
-}
-
-h1 {
-  color: #333;
-}
-
-label {
-  display: block;
-  margin-bottom: 10px;
-}
-
-input[type="radio"] {
-  margin-right: 5px;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-h2.titulo {
-  text-align: start;
-  color:white;
-  font-family: monospace;
-}
-#botonVolver{
-  margin-left: 80%;
-}
-
 .btn{
   font-family: monospace;
 }

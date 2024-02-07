@@ -15,30 +15,30 @@
     
         <div class="flex-row no-wrap">        
             <picture>
-                {% if intentos==0: %}
+                {% if intentos==6: %}
                 <img src = "{{ url_for('static', filename='img/ahorcado_6.png')}}" alt="" id="image6">
                 {% endif %}
-                {% if intentos==1: %}
+                {% if intentos==5: %}
                 <img src = "{{ url_for('static', filename='img/ahorcado_5.png')}}" alt="" id="image5">
                 {% endif %}
-                {% if intentos==2: %}
+                {% if intentos==4: %}
                 <img src = "{{ url_for('static', filename='img/ahorcado_4.png')}}" alt="" id="image4">
                 {% endif %}
                 {% if intentos==3: %}
                 <img src = "{{ url_for('static', filename='img/ahorcado_3.png')}}" alt="" id="image3">
                 {% endif %}
-                {% if intentos==4: %}
+                {% if intentos==2: %}
                 <img src = "{{ url_for('static', filename='img/ahorcado_2.png')}}" alt="" id="image2">
                 {% endif %}
-                {% if intentos==5: %}
+                {% if intentos==1: %}
                 <img src = "{{ url_for('static', filename='img/ahorcado_1.png')}}" alt="" id="image1">        
                 {% endif %}
-                {% if intentos==6: %}
+                {% if intentos==0: %}
                 <img src = "{{ url_for('static', filename='img/ahorcado_0.png')}}" alt="" id="image0">
                 {% endif %}
             </picture>
 
-            {% if intentos==6: %}
+            {% if intentos==0: %}
             <h2 class="palabra" id="palabra">La palabra era {{palabra_a_adivinar}}</h2>
             <br>
             <br>
@@ -55,13 +55,14 @@
         </div>
         <div class="flex-row" id="turnos">
             <div class="col">
-                <h3 class="intentos">Intentos restantes: <span id="intentos" value="{{session.get('intentos')}}">{{ 6- intentos }}</span></h3>
+                <h3 class="intentos">Intentos restantes: <span id="intentos" value="{{intentos}}">{{ intentos }}</span></h3>
             </div>
 
             <form action="/empezar" method="POST">
                 <button onclick="index()" id="reset" class="btn btn-danger" style="margin-right:5px;font-family: monospace;">Elegir otra palabra</button>
+                <input type="hidden" name="dificultad" value="{{dificultad}}">
             </form> 
-            {% if session.get('pista')!= '' : %}
+            {% if pista != '' : %}
             <div  style="width:145px;">
                 <h6 id="pista" style="color:white; ">{{pista}}</h6>
             </div>
@@ -75,10 +76,10 @@
         <form method="POST" action="jugar">
         <div class="flex-row">
             <div class="col">
-                {% if (intentos != 6) and (fin_juego == 0) : %}
+                {% if fin_juego == 0 : %}
                 <div class="flex-row" id="abcdario">
                     {% for letra in abecedario: %}
-                        {%if letra in session.get('letras_usadas', []): %}
+                        {%if letra in letras_usadas: %}
                             <button type="submit" disabled="true" name="letra" value="{{letra}}" class="btn btn-secondary" id="letra">{{ letra }}</button>     
                         {%else%}
                             <button type="submit" name="letra" value="{{letra}}" class="btn btn-light" id="letra">{{ letra }}</button>
