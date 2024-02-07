@@ -18,7 +18,7 @@ def index():
 def empezar():
     dificultad = request.form.get('dificultad')
     juego.iniciar(dificultad)
-    palabra_mostrada = juego.crear_lineas(session['palabra_a_adivinar'][0])
+    palabra_mostrada = juego.crear_lineas(juego.palabra_a_adivinar[0])
     return render_template('jugar.html',dificultad=juego.dificultad, pista=juego.pista, palabra_a_adivinar=juego.palabra_a_adivinar[0], abecedario=juego.abecedario(), intentos=juego.intentos, letras_adivinadas=juego.letras_adivinadas, palabra_mostrada=palabra_mostrada, letras_usadas=juego.letras_usadas, fin_juego=juego.verificar_fin_juego(palabra_mostrada))
 
 
